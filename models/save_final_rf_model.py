@@ -1,12 +1,14 @@
 import mlflow
 import mlflow.sklearn
 import pandas as pd
-
+import os
 from sklearn.model_selection import StratifiedKFold, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
+
+os.environ["MLFLOW_TRACKING_URI"] = "file:./mlruns"
 
 # --------------------------------------------------
 # Load cleaned data
