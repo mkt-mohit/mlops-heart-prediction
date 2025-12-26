@@ -1,3 +1,10 @@
+import logging
+from fastapi import Request
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
 import joblib
 import pandas as pd
 from fastapi import FastAPI
@@ -19,7 +26,12 @@ def health_check():
 
 
 @app.post("/predict", response_model=PredictionOutput)
-def predict(data: HeartDiseaseInput):
+def predict(data: HeartDiseaseInput, request: Request):
+
+    logger.info(
+        f"Request from {request.client.host} | "
+        f"age={data.age}, sex={data.sex}, trestbps={data.trestbps}, chol={data.chol}"
+    )
 
     input_df = pd.DataFrame(
         [[
@@ -38,28 +50,18 @@ def predict(data: HeartDiseaseInput):
             data.thal
         ]],
         columns=[
-            "age",
-            "sex",
-            "cp",
-            "trestbps",
-            "chol",
-            "fbs",
-            "restecg",
-            "thalach",
-            "exang",
-            "oldpeak",
-            "slope",
-            "ca",
-            "thal"
+            "age","sex","cp","trestbps","chol","fbs",
+            "restecg","thalach","exang","oldpeak","slope","ca","thal"
         ]
     )
 
-    # prediction
     prediction = int(model.predict(input_df)[0])
-
-    # probability (SAFE)
     proba = model.predict_proba(input_df)
-    confidence = float(proba[0, 1])   # probability of class "1"
+    confidence = float(proba[0, 1])
+
+    logger.info(
+        f"Prediction={prediction}, Confidence={confidence:.4f}"
+    )
 
     return PredictionOutput(
         prediction=prediction,
