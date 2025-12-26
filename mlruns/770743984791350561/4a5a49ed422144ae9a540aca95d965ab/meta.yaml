@@ -1,0 +1,15 @@
+artifact_uri: file:///home/g2024aa05109/mlops_heart_disease/mlruns/770743984791350561/4a5a49ed422144ae9a540aca95d965ab/artifacts
+end_time: 1766675677092
+entry_point_name: ''
+experiment_id: '770743984791350561'
+lifecycle_stage: active
+run_id: 4a5a49ed422144ae9a540aca95d965ab
+run_name: Random_Forest
+run_uuid: 4a5a49ed422144ae9a540aca95d965ab
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766675645386
+status: 3
+tags: []
+user_id: g2024aa05109
