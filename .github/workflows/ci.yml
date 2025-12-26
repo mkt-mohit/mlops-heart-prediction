@@ -32,6 +32,9 @@ jobs:
         pytest
 
     - name: Train model
+      env:
+        MLFLOW_TRACKING_URI: file:./mlruns
+        MLFLOW_HOME: ./mlruns
       run: |
         python models/save_final_rf_model.py
 
