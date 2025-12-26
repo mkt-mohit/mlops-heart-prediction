@@ -1,7 +1,5 @@
 import os
 
-# CI-safe MLflow storage
-os.environ["MLFLOW_TRACKING_URI"] = "file:./mlruns"
 
 import mlflow
 import mlflow.sklearn
