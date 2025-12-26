@@ -39,7 +39,7 @@ jobs:
         python models/save_final_rf_model.py
 
   deploy:
-    needs: test
+    needs: build-test
     runs-on: ubuntu-latest
 
     steps:
