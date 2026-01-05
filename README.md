@@ -171,8 +171,8 @@ API will be available at:
 
 http://localhost:8000
 
-8. Using the API
-8.1 Health Check
+# 8. Using the API
+# 8.1 Health Check
 GET /
 
 
@@ -183,7 +183,8 @@ Response:
   "message": "Heart Disease Model is running"
 }
 
-8.2 Prediction Endpoint
+# 8.2 Prediction Endpoint
+
 POST /predict
 
 Sample Request
