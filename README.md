@@ -151,75 +151,121 @@ mlops-heart-prediction/
 
 ---
 
-### 7.2 Clone the Repository
+## 7. Setup and Deployment
+
+### 7.1 Clone the Repository
 
 ```bash
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
-7.3 Cloud Deployment (Recommended)
+```
 
-No local dependency installation required
+### 7.2 Cloud Deployment (Recommended)
 
-All dependencies from requirements.txt are installed automatically during the CI/CD pipeline and container build.
+**No local dependency installation required** - all dependencies from `requirements.txt` are installed automatically during the CI/CD pipeline and container build.
 
-Deploy by pushing to main branch:
+Deploy by pushing to the main branch:
 
+```bash
 git push origin main
+```
 
-7.4 Local Development (Optional)
+The GitHub Actions workflow will automatically:
+- Run tests and linting
+- Build the Docker container
+- Deploy to Google Cloud Run
 
-If you want to run the API locally:
+### 7.3 Local Development (Optional)
 
+If you want to run the API locally for development:
+
+```bash
+# Create and activate virtual environment
 python -m venv venv
 source venv/bin/activate        # Linux / macOS
 # venv\Scripts\activate         # Windows
 
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the API server
 uvicorn app.main:app --reload
+```
 
+The API will be available at: **http://localhost:8000**
 
-API will be available at:
+---
 
-http://localhost:8000
+## 8. Using the API
 
-# 8. Using the API
-# 8.1 Health Check
-GET /
+### 8.1 Health Check
 
+Check if the API is running:
 
-Response:
+**Endpoint:** `GET /`
 
+**Response:**
+```json
 {
   "status": "ok",
   "message": "Heart Disease Model is running"
 }
+```
 
-# 8.2 Prediction Endpoint
+### 8.2 Prediction Endpoint
 
-POST /predict
+Make heart disease predictions using patient data.
 
-Sample Request
+**Endpoint:** `POST /predict`
+
+**Sample Request:**
+
+```bash
 curl -X POST https://<cloud-run-url>/predict \
--H "Content-Type: application/json" \
--d '{
-  "age": 67,
-  "sex": 1,
-  "cp": 3,
-  "trestbps": 180,
-  "chol": 320,
-  "fbs": 1,
-  "restecg": 2,
-  "thalach": 90,
-  "exang": 1,
-  "oldpeak": 3.5,
-  "slope": 0,
-  "ca": 3,
-  "thal": 3
-}'
+  -H "Content-Type: application/json" \
+  -d '{
+    "age": 67,
+    "sex": 1,
+    "cp": 3,
+    "trestbps": 180,
+    "chol": 320,
+    "fbs": 1,
+    "restecg": 2,
+    "thalach": 90,
+    "exang": 1,
+    "oldpeak": 3.5,
+    "slope": 0,
+    "ca": 3,
+    "thal": 3
+  }'
+```
 
-Sample Response
+**Sample Response:**
+```json
 {
   "prediction": 1,
   "confidence": 0.84
 }
+```
 
+**Response Fields:**
+- `prediction`: `0` (No heart disease) or `1` (Heart disease present)
+- `confidence`: Model confidence score (0.0 to 1.0)
+
+**Input Features:**
+
+| Feature | Description | Type | Example |
+|---------|-------------|------|---------|
+| `age` | Age in years | int | 67 |
+| `sex` | Sex (1 = male, 0 = female) | int | 1 |
+| `cp` | Chest pain type (0-3) | int | 3 |
+| `trestbps` | Resting blood pressure (mm Hg) | int | 180 |
+| `chol` | Serum cholesterol (mg/dl) | int | 320 |
+| `fbs` | Fasting blood sugar > 120 mg/dl (1 = true, 0 = false) | int | 1 |
+| `restecg` | Resting ECG results (0-2) | int | 2 |
+| `thalach` | Maximum heart rate achieved | int | 90 |
+| `exang` | Exercise induced angina (1 = yes, 0 = no) | int | 1 |
+| `oldpeak` | ST depression induced by exercise | float | 3.5 |
+| `slope` | Slope of peak exercise ST segment (0-2) | int | 0 |
+| `ca` | Number of major vessels colored by fluoroscopy (0-3) | int | 3 |
+| `thal` | Thalassemia (0-3) | int | 3 |
