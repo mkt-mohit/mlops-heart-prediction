@@ -29,7 +29,7 @@ Given patient health attributes such as age, cholesterol, blood pressure, and EC
 ---
 
 ## 3. Architecture Overview
-
+```
 graph LR
     A[GitHub Repository] -->|git push| B{GitHub Actions}
     
@@ -53,7 +53,7 @@ graph LR
     style H fill:#c8e6c9,stroke:#2e7d32
     style I fill:#c8e6c9,stroke:#2e7d32
     style J fill:#c8e6c9,stroke:#2e7d32
-
+```
 ## 4. Technology Stack
 
 | Category | Tools |
