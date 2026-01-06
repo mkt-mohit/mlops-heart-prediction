@@ -29,7 +29,7 @@ Given patient health attributes such as age, cholesterol, blood pressure, and EC
 ---
 
 ## 3. Architecture Overview
-```
+ ```mermaid
 graph LR
     A[GitHub Repository] -->|git push| B{GitHub Actions}
     
