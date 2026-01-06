@@ -1,5 +1,4 @@
 # ❤️ Heart Disease Prediction — End-to-End MLOps Project
-"Commit for Demo"
 ## 1. Introduction
 
 This project demonstrates a **complete end-to-end MLOps pipeline** for building, validating, deploying, and monitoring a machine learning model that predicts **heart disease risk** using the **UCI Heart Disease dataset**.
