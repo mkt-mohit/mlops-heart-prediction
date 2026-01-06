@@ -72,26 +72,30 @@ graph LR
 ## 5. Project Structure
 
 mlops-heart-prediction/
+│
 ├── app/
-│   ├── main.py                      # FastAPI application
-│   └── schemas.py                   # Pydantic models for request/response
+│   ├── main.py
+│   └── schemas.py
+│
 ├── data/
-│   ├── raw/                         # Raw dataset files
-│   └── processed/                   # Preprocessed data
+│   ├── raw/
+│   └── processed/
+│
 ├── models/
 │   └── artifacts/
-│       └── random_forest_final.pkl  # Trained model artifact
+│       └── random_forest_final.pkl
+│
 ├── tests/
-│   ├── test_data.py                 # Data validation tests
-│   └── test_model.py                # Model unit tests
+│   ├── test_data.py
+│   └── test_model.py
+│
 ├── .github/
 │   └── workflows/
-│       └── ci.yaml                  # CI/CD pipeline configuration
-├── Dockerfile                       # Container configuration
-├── requirements.txt                 # Python dependencies
-└── README.md                        # Project documentation
-
----
+│       └── ci.yaml
+│
+├── Dockerfile
+├── requirements.txt
+└── README.md
 
 ## 6. MLOps Workflow
 
