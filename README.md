@@ -30,23 +30,47 @@ Given patient health attributes such as age, cholesterol, blood pressure, and EC
 
 ## 3. Architecture Overview
 
-GitHub Repository
-|
-| (git push)
-v
-GitHub Actions (CI/CD)
-|-- Linting (flake8)
-|-- Unit Tests (pytest)
-|-- Model Training (sanity check)
-|-- Cloud Run Deployment
-|
-v
-Google Cloud Run
-|-- FastAPI REST API
-|-- Docker Container
-|-- Auto-scaling
-|-- Cloud Logging & Metrics
+## 3. Architecture Overview
 
+The project follows a modern CI/CD workflow, automating the path from code commit to a production-ready REST API.
+
+### Technical Workflow
+
+```mermaid
+graph LR
+    %% GitHub Section
+    subgraph GitHub [GitHub Ecosystem]
+        Repo[(GitHub Repository)]
+        Actions{GitHub Actions}
+    end
+
+    %% CI/CD Section
+    subgraph CI_CD [CI/CD Pipeline]
+        Lint[Linting: flake8]
+        Test[Unit Tests: pytest]
+        Train[Model Sanity Check]
+        Deploy[Cloud Run Deploy]
+    end
+
+    %% Production Section
+    subgraph GCP [Google Cloud Run]
+        API[FastAPI REST API]
+        Docker[Docker Container]
+        Scale[Auto-scaling]
+        Logs[Logging & Metrics]
+    end
+
+    %% Connections
+    Repo -->|git push| Actions
+    Actions --> Lint
+    Actions --> Test
+    Actions --> Train
+    Actions --> Deploy
+    Deploy --> GCP
+    GCP --> API
+    GCP --> Docker
+    GCP --> Scale
+    GCP --> Logs
 ---
 
 ## 4. Technology Stack
