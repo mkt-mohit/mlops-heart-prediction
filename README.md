@@ -30,8 +30,6 @@ Given patient health attributes such as age, cholesterol, blood pressure, and EC
 
 ## 3. Architecture Overview
 
-## 3. Architecture Overview
-
 The project follows a modern CI/CD workflow, automating the path from code commit to a production-ready REST API.
 
 ### Technical Workflow
@@ -71,7 +69,6 @@ graph LR
     GCP --> Docker
     GCP --> Scale
     GCP --> Logs
----
 
 ## 4. Technology Stack
 
